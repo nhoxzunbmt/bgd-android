@@ -2,7 +2,7 @@
     <div>
         <main class="bd-masthead" id="content" role="main">
             <b-container>
-                <PostList v-bind:posts="posts" @viewPost="$event"></PostList>
+                <PostList v-bind:posts="posts" v-on:viewPost="viewPost"></PostList>
 
                 <b-row>
                     <b-pagination :total-rows="100" v-model="currentPage" :per-page="10"></b-pagination>
@@ -69,8 +69,8 @@
                         this.errors.push(e)
                     })
             },
-            viewPost: function () {
-                console.log('ID POST VIEW = ' + this.id_post)
+            viewPost: function (id_post) {
+                console.log('ID POST VIEW = ' + id_post)
             }
         }
     }

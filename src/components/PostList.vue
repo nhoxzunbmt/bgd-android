@@ -10,7 +10,7 @@
             <router-link :to="getLink(post)" v-html="post.title.rendered" class="post_title"></router-link>
             </div>
             <p class="card-text" v-html="getExcerpt(post)"></p>
-            <button v-on:click="viewPost('${post.id}')">Xem ngay</button>
+            <button v-on:click="viewPost(post.id)">Xem ngay</button>
         </b-col>
     </b-row>
 </template>
@@ -32,7 +32,7 @@
     export default {
         props: {
             posts: {
-                type: Object,
+                type: Array,
                 require: true,
                 default: function () {
                     return {  }
