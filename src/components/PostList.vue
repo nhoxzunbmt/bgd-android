@@ -10,6 +10,7 @@
             <router-link :to="getLink(post)" v-html="post.title.rendered" class="post_title"></router-link>
             </div>
             <p class="card-text" v-html="getExcerpt(post)"></p>
+            <button v-on:click="viewPost('${post.id}')">Xem ngay</button>
         </b-col>
     </b-row>
 </template>
@@ -31,8 +32,11 @@
     export default {
         props: {
             posts: {
-                type: Array,
-                require: true
+                type: Object,
+                require: true,
+                default: function () {
+                    return {  }
+                }
             },
         },
         methods: {
@@ -49,6 +53,9 @@
                 return _.truncate(post.excerpt.rendered, {
                     'length': 120
                 })
+            },
+            viewPost: function (id_post) {
+                this.$emit('viewPost', id_post)
             }
         }
     }

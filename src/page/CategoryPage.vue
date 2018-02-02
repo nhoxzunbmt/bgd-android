@@ -2,7 +2,7 @@
     <div>
         <main class="bd-masthead" id="content" role="main">
             <b-container>
-                <PostList v-bind:posts="posts"></PostList>
+                <PostList v-bind:posts="posts" @viewPost="$event"></PostList>
 
                 <b-row>
                     <b-pagination :total-rows="100" v-model="currentPage" :per-page="10"></b-pagination>
@@ -32,8 +32,9 @@
     import axios from 'axios'
     import PostList from '@/components/PostList'
     import Pagination from '@/components/Pagination'
+
     export default {
-        components:{
+        components: {
             PostList,
             Pagination
         },
@@ -45,7 +46,8 @@
                 category_name: 'Mon Ngon',
                 posts: [],
                 errors: [],
-                currentPage:1
+                currentPage: 1,
+                id_post: 0,
             }
         },
         // Fetches posts when the component is created.
@@ -57,15 +59,18 @@
             'currentPage': 'fetchData'
         },
         methods: {
-            fetchData: function(){
+            fetchData: function () {
                 axios.get(`${process.env.API_URL}wp/v2/posts?page=${this.currentPage}&per_page=12&fields=id,title,slug,date,better_featured_image,excerpt&categories=${this.$route.params.id}`)
-                .then(response => {
-                    // JSON responses are automatically parsed.
-                    this.posts = response.data
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                })
+                    .then(response => {
+                        // JSON responses are automatically parsed.
+                        this.posts = response.data
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    })
+            },
+            viewPost: function () {
+                console.log('ID POST VIEW = ' + this.id_post)
             }
         }
     }
