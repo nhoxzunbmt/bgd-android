@@ -31,12 +31,10 @@
 <script>
     import axios from 'axios'
     import PostList from '@/components/PostList'
-    import Pagination from '@/components/Pagination'
 
     export default {
         components: {
-            PostList,
-            Pagination
+            PostList
         },
         computed: {
             version: () => 1

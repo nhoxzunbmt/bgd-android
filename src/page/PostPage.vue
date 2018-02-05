@@ -45,7 +45,7 @@
         }
     }
 </script>
-<style>
+<style scoped>
     .post_container {
         padding: 50px 0;
     }
