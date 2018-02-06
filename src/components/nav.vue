@@ -22,6 +22,7 @@
 <style>
     .logo_site{
         width: 150px;
+
     }
 </style>
 <script>
