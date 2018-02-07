@@ -1,13 +1,21 @@
 <template>
     <div>
         <main class="bd-masthead" id="content" role="main">
+
             <b-container>
                 <PostList v-bind:posts="posts" v-on:viewPost="viewPost"></PostList>
+
+
+
 
                 <b-row>
                     <b-pagination :total-rows="100" v-model="currentPage" :per-page="10"></b-pagination>
                     <div>currentPage: {{currentPage}}</div>
                 </b-row>
+
+                <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+                    ...
+                </div>
             </b-container>
 
         </main>
@@ -46,6 +54,9 @@
                 errors: [],
                 currentPage: 1,
                 id_post: 0,
+                busy: false,
+                count:0,
+                isSelected:true
             }
         },
         // Fetches posts when the component is created.
@@ -62,10 +73,12 @@
                     .then(response => {
                         // JSON responses are automatically parsed.
                         this.posts = response.data
+
                     })
                     .catch(e => {
                         this.errors.push(e)
                     })
+
             },
             viewPost: function (id_post) {
                 console.log('ID POST VIEW = ' + id_post)

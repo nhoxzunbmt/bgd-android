@@ -1,6 +1,6 @@
 <template>
     <b-row>
-        <b-col md="4" class="post_item" v-if="posts && posts.length" v-for="post of posts" :key="post.id">
+        <b-col md="4" class="post_item {selected: isSelected}" v-if="posts && posts.length" v-for="post of posts" :key="post.id">
             <div v-if="post.better_featured_image">
                 <b-img :src="getFeaturedImage(post)" fluid alt="Responsive image" />
             </div>

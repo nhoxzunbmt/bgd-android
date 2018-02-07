@@ -10,11 +10,13 @@ import store from './store'
 import App from './layout/default'
 import BootstrapVue from 'bootstrap-vue'
 import router from './router/routes'
+import infiniteScroll from 'vue-infinite-scroll'
 
 
 Vue.config.productionTip = process.env.NODE_ENV === 'production'
 
 Vue.use(BootstrapVue)
+Vue.use(infiniteScroll);
 
 /* eslint-disable no-new */
 new Vue({
