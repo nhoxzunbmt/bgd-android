@@ -1,5 +1,6 @@
 import {
     ALL_POSTS,
+    ALL_POSTS_SUCCESS,
     POST_DETAIL,
 
     ALL_CATEGORIES,
@@ -11,6 +12,9 @@ export const postMutations = {
     [ALL_POSTS] (state) {
         state.showLoader = true
         // this[]
+    },
+    [ALL_POSTS_SUCCESS] (state) {
+        state.showLoader = true
     },
     [POST_DETAIL] (state) {
         state.showLoader = true
