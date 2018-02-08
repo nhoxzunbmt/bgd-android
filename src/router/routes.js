@@ -4,6 +4,7 @@ import HomePage from '@/page/HomePage'
 import CategoryPage from '@/page/CategoryPage'
 import PostPage from '@/page/PostPage'
 import TestPage from '@/page/TestPage'
+import Test1 from '@/page/Test1'
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,11 @@ export default new Router({
             path: '/test',
             name: 'TestPage',
             component: TestPage
+        },
+        {
+            path: '/test1',
+            name: 'Test1',
+            component: Test1
         },
         {
             path: '/admin',

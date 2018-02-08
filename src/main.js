@@ -5,19 +5,19 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
 import Vue from 'vue'
-// import VueOnsen from 'vue-onsenui'
-import store from './store'
+import Vuex from 'vuex'
+
 import App from './layout/default'
 import BootstrapVue from 'bootstrap-vue'
 import router from './router/routes'
 import infiniteScroll from 'vue-infinite-scroll'
-
+import store from './store/index'
 
 Vue.config.productionTip = process.env.NODE_ENV === 'production'
 
 Vue.use(BootstrapVue)
 Vue.use(infiniteScroll);
-
+Vue.use(Vuex)
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
@@ -26,3 +26,4 @@ new Vue({
     template: '<App/>',
     components: {App}
 })
+
