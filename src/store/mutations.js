@@ -4,7 +4,7 @@ import {
     POST_DETAIL,
 
     ALL_CATEGORIES,
-    CATEGORY_DETAIL, POST_BY_CATEGORY, POST_BY_CATEGORY_SUCCESS, POST_DETAIL_SUCCESS
+    CATEGORY_DETAIL, POST_BY_CATEGORY, POST_BY_CATEGORY_SUCCESS, POST_DETAIL_SUCCESS, GET_DBFILE, SET_DBFILE
 
 } from './mutation-types'
 
@@ -35,6 +35,18 @@ export const postMutations = {
         state.post = payload
         state.showLoader = false
     },
+    [GET_DBFILE] (state,dbFile) {
+        //alert(dbFile)
+        //console.log(dbFile);
+        //console.log('begin GET_DBFILE mutations in store')
+        state.dbFile = dbFile
+        state.showLoader = true
+        //console.log('this length ' + this.state.dbFile.length)
+        //console.log('end GET_DBFILE mutations in store')
+    },
+    [SET_DBFILE] (state,payload) {
+        state.db = payload.data
+    }
 }
 
 export const categoryMutations = {
@@ -49,10 +61,5 @@ export const categoryMutations = {
 
 
 export const englishMutations = {
-    GET_DBFILE (state, dbFile) {
-        console.log('begin GET_DBFILE mutations in store')
-        this.state.dbFile = dbFile
-        console.log('this length ' + this.state.dbFile.length)
-        console.log('end GET_DBFILE mutations in store')
-    }
+
 }

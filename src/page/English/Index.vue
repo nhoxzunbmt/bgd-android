@@ -24,30 +24,30 @@
         },
 
         created: function () {
-            console.log('begin created HelloWorld')
             this.$store.dispatch('getDBFile', { self: this })
-            console.log('end created HelloWorld')
         },
 
         computed: {
             lengthOfValues: function () {
-                return this.$store.state.values.length
+                return this.$store.state.english.length
             },
             getValues: function () {
-                return this.$store.state.values
+                return this.$store.state.english
             }
         },
 
+
         methods: {
             DBFileIsLoaded: function () {
-                console.log('begin DBFileIsLoaded')
-                this.$store.state.db = new SQL.Database(this.$store.state.dbFile)
+                //console.log('begin DBFileIsLoaded')
+                let db_data = new SQL.Database(this.$store.state.dbFile)
+                this.$store.commit('SET_DBFILE',{data: db_data})
                 let sql = 'select * from days'
                 let rlt = this.$store.state.db.exec(sql)
-                this.$store.state.values = rlt[0].values
+                this.$store.state.english = rlt[0].values
 
-                console.log(rlt)
-                console.log('end DBFileIsLoaded')
+                //console.log(rlt)
+                //console.log('end DBFileIsLoaded')
             }
         }
     }

@@ -27,11 +27,13 @@ export default new Vuex.Store({
         post: [],
         posts: [],
 
-        categories: []
-    },
-    mutations: Object.assign({
+        categories: [],
 
-    }, postMutations, categoryMutations, englishMutations),
+        english: [],
+        dbFile: null,
+        db: null,
+    },
+    mutations: Object.assign({}, postMutations, categoryMutations, englishMutations),
     getters: Object.assign({}, postGetters, categoryGetters),
     actions: Object.assign({
 

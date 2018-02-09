@@ -65,7 +65,7 @@
             axios.get(`http://localhost:8069/v1/bgd/web-app/category`)
                 .then(response => {
                     // JSON responses are automatically parsed.
-                    console.log(response.data);
+                    //console.log(response.data);
                     this.categories = response.data.data
                 })
                 .catch(e => {
