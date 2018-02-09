@@ -1,17 +1,27 @@
 <template>
     <div id="example">
-        <p>Thông điệp ban đầu: "{{ message }}"</p>
-        <p>Thông điệp bị đảo ngược bằng tính toán (computed): "{{ reversedMessage }}"</p>
+        <PostList v-bind:posts="posts"></PostList>
     </div>
 </template>
 
 <script>
+    import PostList from '@/components/PostList'
     export default {
+        name: 'Test1',
+        created () {
+
+            if (this.posts.length === 0) {
+                console.log('allPosts')
+                this.$store.dispatch('allPosts')
+            }
+        },
+        components: {
+            PostList
+        },
         computed: {
-            // một computed getter
-            reversedMessage: function () {
-                // `this` trỏ tới đối tượng vm
-                return this.message.split(' ').reverse().join(' ')
+            posts () {
+                console.log('posts')
+                return this.$store.getters.allPosts
             }
         },
         data() {
@@ -20,9 +30,6 @@
                 counter:1,
 
             }
-        },
-        created(){
-            console.log(this.$store.state.cart)
         }
     }
 </script>

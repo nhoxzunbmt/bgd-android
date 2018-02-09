@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 import { postGetters, categoryGetters } from './getters'
-import { postMutations, categoryMutations } from './mutations'
+import {postMutations, categoryMutations, englishMutations} from './mutations'
 import { postActions } from './actions'
 Vue.use(Vuex)
 export default new Vuex.Store({
+
     strict: true,
     state: {
         // bought items
@@ -27,7 +29,12 @@ export default new Vuex.Store({
 
         categories: []
     },
-    mutations: Object.assign({}, postMutations, categoryMutations),
+    mutations: Object.assign({
+
+    }, postMutations, categoryMutations, englishMutations),
     getters: Object.assign({}, postGetters, categoryGetters),
-    actions: Object.assign({}, postActions)
+    actions: Object.assign({
+
+    }, postActions),
+    plugins: [createPersistedState()]
 })

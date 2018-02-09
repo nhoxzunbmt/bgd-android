@@ -10,12 +10,12 @@
 
                 <b-row>
                     <b-pagination :total-rows="100" v-model="currentPage" :per-page="10"></b-pagination>
-                    <div>currentPage: {{currentPage}}</div>
+                    <!--<div>currentPage: {{currentPage}}</div>-->
                 </b-row>
 
-                <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-                    ...
-                </div>
+                <!--<div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">-->
+                    <!--...-->
+                <!--</div>-->
             </b-container>
 
         </main>
@@ -45,27 +45,40 @@
             PostList
         },
         computed: {
-            version: () => 1
-        },
-        data() {
-            return {
-                category_name: 'Mon Ngon',
-                posts: [],
-                errors: [],
-                currentPage: 1,
-                id_post: 0,
-                busy: false,
-                count:0,
-                isSelected:true
+            posts () {
+                //console.log('posts')
+                return this.$store.getters.postByCategory
             }
+            //version: () => 1
+
         },
+        // data() {
+        //     return {
+        //         category_name: 'Mon Ngon',
+        //         posts: [],
+        //         errors: [],
+        //         currentPage: 1,
+        //         id_post: 0,
+        //         busy: false,
+        //         count:0,
+        //         isSelected:true
+        //     }
+        // },
         // Fetches posts when the component is created.
         created() {
-            this.fetchData()
+            if (this.posts.length === 0) {
+                //console.log('allPosts')
+                this.$store.dispatch('postByCategory',{_id:this.$route.params.id,currentPage:this.currentPage})
+            }
+            //this.fetchData()
+            // if (this.posts.length === 0) {
+            //     console.log('allPosts')
+            //     this.$store.dispatch('allPosts')
+            // }
         },
         watch: {
-            '$route': 'fetchData',
-            'currentPage': 'fetchData'
+            //'$route': 'fetchData',
+            //'currentPage': 'fetchData'
         },
         methods: {
             fetchData: function () {

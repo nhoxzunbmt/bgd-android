@@ -3,12 +3,13 @@
         <div class="post_container">
             <b-row>
                 <b-col>
-                    <h1 v-html="post.title.rendered" class="post_title"></h1>
+                    <!--<h1 v-html="post.title.rendered" class="post_title"></h1>-->
                     <div class="pos_sub_title">Nguyên Liệu</div>
-                    <div v-if="post.custom_fields.nguyen_lieu" v-html="post.custom_fields.nguyen_lieu">
+                    <div v-if="post.custom_fields" v-html="post.custom_fields.nguyen_lieu">
                     </div>
                     <div class="pos_sub_title">Cách làm</div>
-                    <div v-html="post.content.rendered" class="post-content">
+                    <div class="post-content">
+                        {{ post.content.rendered }}
                     </div>
                 </b-col>
             </b-row>

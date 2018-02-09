@@ -5,6 +5,8 @@ import CategoryPage from '@/page/CategoryPage'
 import PostPage from '@/page/PostPage'
 import TestPage from '@/page/TestPage'
 import Test1 from '@/page/Test1'
+import English_Index from '@/page/English/Index'
+
 Vue.use(Router)
 
 export default new Router({
@@ -20,7 +22,7 @@ export default new Router({
             component: CategoryPage
         },
         {
-            path: '/post/:slug',
+            path: '/post/:id',
             name: 'PostPage',
             component: PostPage
         },
@@ -35,30 +37,35 @@ export default new Router({
             component: Test1
         },
         {
-            path: '/admin',
-            name: 'Admin',
-
-            // Parent routes still has a component
-            component: TestPage,
-
-            // Child routes
-            children: [
-                {
-                    path: 'new',
-                    name: 'New',
-                    component: TestPage
-                },
-                {
-                    path: '',
-                    name: 'Products',
-                    component: TestPage
-                },
-                {
-                    path: 'edit/:id',
-                    name: 'Edit',
-                    component: TestPage
-                }
-            ]
+            path: '/english',
+            name: 'English_Index',
+            component: English_Index
         }
+        // {
+        //     path: '/admin',
+        //     name: 'Admin',
+        //
+        //     // Parent routes still has a component
+        //     component: TestPage,
+        //
+        //     // Child routes
+        //     children: [
+        //         {
+        //             path: 'new',
+        //             name: 'New',
+        //             component: TestPage
+        //         },
+        //         {
+        //             path: '',
+        //             name: 'Products',
+        //             component: TestPage
+        //         },
+        //         {
+        //             path: 'edit/:id',
+        //             name: 'Edit',
+        //             component: TestPage
+        //         }
+        //     ]
+        // }
     ]
 })
