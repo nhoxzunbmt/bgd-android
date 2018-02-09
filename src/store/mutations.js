@@ -4,7 +4,7 @@ import {
     POST_DETAIL,
 
     ALL_CATEGORIES,
-    CATEGORY_DETAIL, POST_BY_CATEGORY, POST_BY_CATEGORY_SUCCESS
+    CATEGORY_DETAIL, POST_BY_CATEGORY, POST_BY_CATEGORY_SUCCESS, POST_DETAIL_SUCCESS
 
 } from './mutation-types'
 
@@ -30,7 +30,11 @@ export const postMutations = {
 
     [POST_DETAIL] (state) {
         state.showLoader = true
-    }
+    },
+    [POST_DETAIL_SUCCESS] (state,payload) {
+        state.post = payload
+        state.showLoader = false
+    },
 }
 
 export const categoryMutations = {

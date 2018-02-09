@@ -1,12 +1,18 @@
 <template>
+  <v-app id="inspire">
   <div class="bd-home">
     <Nav />
 
+    <v-content>
 
-    <router-view></router-view>
+        <router-view></router-view>
+
+    </v-content>
+
 
 
   </div>
+  </v-app>
 </template>
 
 <script>

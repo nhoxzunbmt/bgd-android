@@ -32,7 +32,7 @@ export const postActions = {
 
     postById({commit}, payload) {
         commit(POST_DETAIL)
-        axios.get(`${API_BASE}/posts/${payload}`).then(response => {
+        axios.get(`${API_BASE}wp/v2/posts/${payload._id}`).then(response => {
             console.log(payload, response.data)
             commit(POST_DETAIL_SUCCESS, response.data)
         })
