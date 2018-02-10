@@ -29,7 +29,8 @@ export default new Vuex.Store({
 
         categories: [],
 
-        english: [],
+        englishes: [],
+        englishes_sound: [],
         dbFile: null,
         db: null,
     },

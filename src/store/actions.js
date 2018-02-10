@@ -42,7 +42,7 @@ export const postActions = {
         //console.log('begin getDBFile')
         // Vue.http.get('http://localhost:8080/assets/mytest.db', {responseType: 'arraybuffer'})
         //axios.get('http://localhost:8080/src/assets/mytest.db', {responseType: 'arraybuffer'})
-        axios.get('http://localhost:8080/src/assets/mytest.db', {responseType: 'arraybuffer'}).then(response => {
+        axios.get('http://localhost:8080/src/assets/lingcor.db3', {responseType: 'arraybuffer'}).then(response => {
 
             //console.log('begin http.get')
             //console.log(response)
