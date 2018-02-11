@@ -23,13 +23,13 @@
                 <div class="sound-pronunciation">
 
                     <div v-for="sound in filteredItems(english_word.WordPronunciationId)" class="sound-item">
-                            <audio ref="soundElm" :src="getSoundSrc(sound.WordName,sound.Position)"></audio>
-                            {{ sound.Pronounce }}
+                        <audio ref="soundElm" :src="getSoundSrc(sound.WordName,sound.Position)"></audio>
+                        {{ sound.Pronounce }}
                     </div>
 
                 </div>
-                    <button v-on:click="play_sound" type="button">Click Me to Play Sound</button>
-                    <audio ref="audioElm" :src="getSoundSrc(english_word.WordName,english_word.Position)"></audio>
+                <button v-on:click="play_sound" type="button">Click Me to Play Sound</button>
+                <audio ref="audioElm" :src="getSoundSrc(english_word.WordName,english_word.Position)"></audio>
                 <div>
 
                 </div>
@@ -77,6 +77,8 @@
     import axios from 'axios'
     import _ from 'lodash'
 
+    import {Howl, Howler} from 'howler';
+
     export default {
         data() {
             return {
@@ -110,14 +112,69 @@
         },
         methods: {
             play_sound: function (event) {
-                this.$refs.audioElm.play();
-                // this.$refs.soundElm.each(function ($this) {
-                //     $this.play();
-                // })
-                console.log(this.$refs.soundElm)
-                for(let i = 0;i<=this.$refs.soundElm.length; i++){
-                    this.$refs.soundElm[i].play()
+
+                let sounds_item = [this.getSoundSrc(this.english_word.WordName, this.english_word.Position)]
+                // for (var sound in this.filteredItems(english_word.WordPronunciationId)) {
+                //     sounds_item.push(this.getSoundSrc(sound.WordName,sound.Position));
+                // }
+
+                let sItems = this.filteredItems(this.english_word.WordPronunciationId);
+
+                for (let ia = 0; ia < sItems.length; ia++) {
+                    //console.log(ia);
+                    let sound = sItems[ia];
+                    //console.log(sound);
+                    let src = this.getSoundSrc(sound.WordName,sound.Position);
+                    sounds_item.push(src);
                 }
+                console.log(sounds_item);
+                // _.each(this.filteredItems(this.english_word.WordPronunciationId), function(sound, key){
+                //     let src = this.getSoundSrc(sound.WordName,sound.Position);
+                //     sounds_item.push(src);
+                // });
+
+                let onPlay = [false],  // this one is useless now
+                    pCount = 0,
+                    howlerBank = [],
+                    loop = false;
+
+                // playing i+1 audio (= chaining audio files)
+                let onEnd = function(e) {
+                    if (loop === true ) { pCount = (pCount + 1 !== howlerBank.length)? pCount + 1 : 0; }
+                    else { pCount = pCount + 1; }
+                    howlerBank[pCount].play();
+                };
+
+                // build up howlerBank:
+                sounds_item.forEach(function(current, i) {
+                    howlerBank.push(new Howl({ src: [sounds_item[i]], onend: onEnd, buffer: true }))
+                });
+
+                // initiate the whole :
+                howlerBank[0].play();
+
+                // Setup the new Howl.
+                // const sound_control = new Howl({
+                //     src: sounds_item,
+                //     onend: function(e) {
+                //
+                //         console.log(e)
+                //     }
+                // });
+                // sound_control.play();
+
+// Change global volume.
+                //Howler.volume(0.5);
+                //
+                //
+                // this.$refs.audioElm.play();
+                // // this.$refs.soundElm.each(function ($this) {
+                // //     $this.play();
+                // // })
+                // console.log(this.$refs.soundElm)
+                // for(let i = 0;i<=this.$refs.soundElm.length; i++){
+                //     this.$refs.soundElm[i].play()
+                // }
             },
             getSoundSrc(name, position) {
                 return 'https://lingcor.net/LearningEnglish/pronunciation/' + name + position + '.mp3';

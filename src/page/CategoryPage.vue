@@ -82,15 +82,15 @@
         },
         methods: {
             fetchData: function () {
-                axios.get(`${process.env.API_URL}wp/v2/posts?page=${this.currentPage}&per_page=12&fields=id,title,slug,date,better_featured_image,excerpt&categories=${this.$route.params.id}`)
-                    .then(response => {
-                        // JSON responses are automatically parsed.
-                        this.posts = response.data
-
-                    })
-                    .catch(e => {
-                        this.errors.push(e)
-                    })
+                // axios.get(`${process.env.API_URL}wp/v2/posts?page=${this.currentPage}&per_page=12&fields=id,title,slug,date,better_featured_image,excerpt&categories=${this.$route.params.id}`)
+                //     .then(response => {
+                //         // JSON responses are automatically parsed.
+                //         this.posts = response.data
+                //
+                //     })
+                //     .catch(e => {
+                //         this.errors.push(e)
+                //     })
 
             },
             viewPost: function (id_post) {

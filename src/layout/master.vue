@@ -62,15 +62,15 @@
         },
         name: 'App',
         created() {
-            axios.get(`http://localhost:8069/v1/bgd/web-app/category`)
-                .then(response => {
-                    // JSON responses are automatically parsed.
-                    //console.log(response.data);
-                    this.categories = response.data.data
-                })
-                .catch(e => {
-                    this.errors = e;
-                })
+            // axios.get(`http://localhost:8069/v1/bgd/web-app/category`)
+            //     .then(response => {
+            //         // JSON responses are automatically parsed.
+            //         //console.log(response.data);
+            //         this.categories = response.data.data
+            //     })
+            //     .catch(e => {
+            //         this.errors = e;
+            //     })
         },
         methods: {
             getLink: function (cat) {
