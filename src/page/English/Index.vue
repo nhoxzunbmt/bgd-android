@@ -28,8 +28,14 @@
                     </div>
 
                 </div>
-                <button v-on:click="play_sound" type="button">Click Me to Play Sound</button>
+                <button v-on:click="play_sound" type="button" v-if="!soundIsRunning">Play</button>
+                <button v-on:click="pause_sound" type="button" v-else>Pause</button>
+
+                <tool-box :name="name"></tool-box>
+
+
                 <audio ref="audioElm" :src="getSoundSrc(english_word.WordName,english_word.Position)"></audio>
+
                 <div>
 
                 </div>
@@ -76,20 +82,28 @@
     import SQL from 'sql.js'
     import axios from 'axios'
     import _ from 'lodash'
+    import ToolBox from '@/components/English/ToolBox'
 
     import {Howl, Howler} from 'howler';
 
     export default {
+        components: {
+            ToolBox
+        },
         data() {
             return {
-                msg: 'ENGLISH FOR TODAY',
+                msg: 'E',
                 english_word: [],
                 english_sound: [],
 
                 englishes: [],
                 englishes_sound_items: [],
 
-                word_number: 0
+                word_number: 0,
+
+                soundIsRunning: false,
+
+                name: 'helo'
             }
         },
 
@@ -112,6 +126,8 @@
         },
         methods: {
             play_sound: function (event) {
+
+                this.soundIsRunning = true;
 
                 let sounds_item = [this.getSoundSrc(this.english_word.WordName, this.english_word.Position)]
                 // for (var sound in this.filteredItems(english_word.WordPronunciationId)) {
@@ -140,9 +156,23 @@
 
                 // playing i+1 audio (= chaining audio files)
                 let onEnd = function(e) {
-                    if (loop === true ) { pCount = (pCount + 1 !== howlerBank.length)? pCount + 1 : 0; }
-                    else { pCount = pCount + 1; }
-                    howlerBank[pCount].play();
+
+
+                        if (loop === true ) {
+                            pCount = (pCount + 1 !== howlerBank.length)? pCount + 1 : 1;
+                            console.log('loop === true && pCount = ' + pCount);
+                        }
+                        else{
+                            pCount = pCount + 1;
+                            console.log('loop === false && pCount = ' + pCount);
+                        }
+
+                        console.log('howlerBank.length = ' + howlerBank.length);
+
+                        howlerBank[pCount].play();
+
+
+                    //this.pause_sound();
                 };
 
                 // build up howlerBank:
@@ -153,28 +183,13 @@
                 // initiate the whole :
                 howlerBank[0].play();
 
-                // Setup the new Howl.
-                // const sound_control = new Howl({
-                //     src: sounds_item,
-                //     onend: function(e) {
-                //
-                //         console.log(e)
-                //     }
-                // });
-                // sound_control.play();
 
-// Change global volume.
-                //Howler.volume(0.5);
-                //
-                //
-                // this.$refs.audioElm.play();
-                // // this.$refs.soundElm.each(function ($this) {
-                // //     $this.play();
-                // // })
-                // console.log(this.$refs.soundElm)
-                // for(let i = 0;i<=this.$refs.soundElm.length; i++){
-                //     this.$refs.soundElm[i].play()
-                // }
+
+
+            },
+
+            pause_sound: function () {
+                this.soundIsRunning = false;
             },
             getSoundSrc(name, position) {
                 return 'https://lingcor.net/LearningEnglish/pronunciation/' + name + position + '.mp3';
