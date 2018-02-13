@@ -3,12 +3,12 @@
         <h1 class="text-sm-center">{{ msg }}</h1>
 
         <v-app id="inspire">
-            <v-card>
-                <v-card-text>
-                    <p>{{ word_number }}</p>
-                    <v-slider v-model="word_number" step="1" min="1" max="3000"></v-slider>
-                </v-card-text>
-            </v-card>
+            <!--<v-card>-->
+                <!--<v-card-text>-->
+                    <!--<p>{{ word_number }}</p>-->
+                    <!--<v-slider v-model="word_number" step="1" min="1" max="3000"></v-slider>-->
+                <!--</v-card-text>-->
+            <!--</v-card>-->
 
             <v-card>
                 <v-card-text>
@@ -31,7 +31,18 @@
                 <button v-on:click="play_sound" type="button" v-if="!soundIsRunning">Play</button>
                 <button v-on:click="pause_sound" type="button" v-else>Pause</button>
 
-                <tool-box :name="name"></tool-box>
+
+                <word-list :word_name="word_name" :word_list="word_list"></word-list>
+
+                <tool-box
+                        :word_name="word_name"
+                        :word_list="word_list"
+                        :word_number="word_number"
+                        @WordWasChange="word_name = $event"
+                        @WordNumberWasChange="word_number = $event"
+                        @Playing="play()"
+                ></tool-box>
+
 
 
                 <audio ref="audioElm" :src="getSoundSrc(english_word.WordName,english_word.Position)"></audio>
@@ -83,11 +94,13 @@
     import axios from 'axios'
     import _ from 'lodash'
     import ToolBox from '@/components/English/ToolBox'
-
+    import WordList from '@/components/English/WordList'
     import {Howl, Howler} from 'howler';
+
 
     export default {
         components: {
+            WordList,
             ToolBox
         },
         data() {
@@ -103,7 +116,15 @@
 
                 soundIsRunning: false,
 
-                name: 'helo'
+                name: 'helo',
+
+                word_name: 'birthday',
+
+                word_list: [
+                    'birthday',
+                    'busy',
+                    'cake'
+                ],
             }
         },
 
@@ -125,6 +146,17 @@
 
         },
         methods: {
+            play(){
+                if ((this.word_number + 1) === this.word_list.length) {
+                    this.word_number = 0
+                }
+                else {
+                    this.word_number += 1
+
+                }
+
+                this.word_name = this.word_list[this.word_number]
+            },
             play_sound: function (event) {
 
                 this.soundIsRunning = true;
