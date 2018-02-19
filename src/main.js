@@ -25,6 +25,18 @@ Vue.use(Vuex)
 Vue.filter('toMota', function (value) {
     return `Đây là mô tả : ${value}`;
 });
+// Vue.mixin({
+//   created: function () {
+//     var myOption = this.$options.myOption
+//     if (myOption) {
+//       console.log(myOption)
+//     }
+//   }
+// })
+
+// Vue.config.optionMergeStrategies.myOption = function (toVal, fromVal) {
+//   return toVal
+// }
 
 /* eslint-disable no-new */
 new Vue({

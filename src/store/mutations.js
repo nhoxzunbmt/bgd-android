@@ -22,6 +22,8 @@ export const postMutations = {
     [POST_BY_CATEGORY] (state) {
         state.showLoader = true
     },
+
+
     [POST_BY_CATEGORY_SUCCESS] (state) {
         state.posts = payload
         state.showLoader = false

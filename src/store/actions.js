@@ -37,7 +37,13 @@ export const postActions = {
             commit(POST_DETAIL_SUCCESS, response.data)
         })
     },
-
+    postBySlug({commit}, payload) {
+      commit(POST_DETAIL)
+      axios.get(`${API_BASE}wp/v2/posts/${payload._id}`).then(response => {
+        // // console.log(payload, response.data)
+        commit(POST_DETAIL_SUCCESS, response.data)
+      })
+    },
     getDBFile ({ commit }, { self }) {
         //console.log('begin getDBFile')
         // Vue.http.get('http://localhost:8080/assets/mytest.db', {responseType: 'arraybuffer'})
